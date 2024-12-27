@@ -83,6 +83,7 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    needs: [build, test]
     name: Deploy to Cloudflare Pages
     steps:
       - name: Download artifacts
