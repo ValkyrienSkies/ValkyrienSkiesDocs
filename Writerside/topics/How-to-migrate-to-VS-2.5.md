@@ -1,3 +1,5 @@
+<show-structure depth="2"/>
+
 # How to migrate to VS 2.5
 
 Valkyrien Skies 2.5 introduced a number of breaking API changes. Addon developers and other mod developers with
@@ -133,6 +135,60 @@ final class MyAttachment {
 </tab>
 </tabs>
 
+### Migrate from constraints to joints
+
+> Try to avoid using `apigame` - we don't make any [backwards compatibility](Compatibility.md#backwards-compatibility) 
+> guarantees for it.
+> 
+{style="warning"}
+
+Constraints are now [joints](Joints.md), and everything in `org.valkyrienskies.core.apigame.constraints` has been 
+removed. 
+
+
+### Use `rebuild` and `toBuilder` instead of `ShipTransform.copy`
+
+> Also recommended: start using `BodyTransform` instead of `ShipTransform`. You can freely cast between the two.
+> 
+{style="note"}
+
+<tabs group="ktj">
+<tab title="Kotlin" group-key="kotlin">
+<compare type="top-bottom" first-title="Before" second-title="After">
+<code-block lang="Kotlin">
+val transform: ShipTransform = ...
+val newTransform: ShipTransform = transform.copy(
+    positionInWorld = Vector3d(123)
+)
+</code-block>
+<code-block lang="Kotlin">
+val transform: ShipTransform = ...
+val newTransform: BodyTransform = transform.rebuild {
+    position.set(Vector3d(123))
+}
+</code-block>
+</compare>
+</tab>
+<tab title="Java" group-key="java">
+<compare type="top-bottom" first-title="Before" second-title="After">
+<code-block lang="Java">
+ShipTransform transform = ...
+ShipTransform newTransform = transform.copy(
+    new Vector3d(123), 
+    transform.getPositionInShip(),
+    transform.getRotation(),
+    transform.getScaling()
+);
+</code-block>
+<code-block lang="Java">
+ShipTransform transform = ...
+BodyTransform newTransform = transform.toBuilder()
+    .position(new Vector3d(123))
+    .build();
+</code-block>
+</compare>
+</tab>
+</tabs>
 
 ## Recommended changes
 

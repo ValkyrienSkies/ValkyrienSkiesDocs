@@ -17,6 +17,7 @@
         </toc-element>
     </toc-element>
     <toc-element toc-title="Concepts">
+        <toc-element topic="Joints.md"/>
         <toc-element topic="The-Shipyard.md"/>
         <toc-element topic="The-Attachment-System-Explained.md"/>
     </toc-element>
