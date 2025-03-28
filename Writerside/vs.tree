@@ -24,7 +24,6 @@
     <toc-element toc-title="General documentation">
         <toc-element topic="The-Attachment-System-Explained.md"/>
         <toc-element topic="Events.md"/>
-        <toc-element topic="Networking.md"/>
         <toc-element topic="Dimension-Ids.md"/>
     </toc-element>
     <toc-element toc-title="TODO">
