@@ -1,8 +1,10 @@
+
 # The Attachment System
 
 > Much of the attachment system is marked with `@VsBeta` and may change in the future.
 > 
 {style="note"}
+
 
 The **attachment system** is a part of vs-core which addons and third parties can use to attach data to ships and other
 objects managed by vs-core.
@@ -13,39 +15,269 @@ objects managed by vs-core.
 - You want to persist/serialize data with a ship
 - You want to apply forces to a ship
 
-## (Optional) Comparison of {(thing being compared)}
+## Saving, Loading and removing
 
-{(Use this section to compare options or alternatives.)}
+In the package `org.valkyrienskies.core.api.ships`
+there are two extension functions for saving and loading attachments.
 
-Table: {(Table title which concisely explains the comparison.)}
+To save an attachment you can do: 
 
-## (Optional) Related resources
+<tabs>
+<tab title="Java">
 
-{(Use this section to provide links to documentation related to the concept that the user can read for more information.
-If you can name this section manually (it is not generated automatically or has a heading pre-agreed within a team),
-we recommend to use "Related concepts" or "Additional information" as more descriptive ones.)}
+```java
+    serverShip.saveAttachment(MyAttachmentClass.class, new MyAttachmentClass());
+```
 
-If you would like to dive deeper or start implementing {(concept)},
-check out the following resources:
+</tab>
+<tab title="Kotlin">
 
-How-to guides
+```kotlin
+    serverShip.saveAttachment(MyAttachmentClass())
+```
 
-1. Item 1
+</tab>
+</tabs>
 
-2. Item 2
+And to load the attachment:
 
-Linked concepts
+<tabs>
+<tab title="Java">
 
-1. Concept 1
+```java
+var attachment = serverShip.getAttachment(MyAttachmentClass.class);
+```
 
-2. Concept 2
+</tab>
+<tab title="Kotlin">
 
-External resources
+```kotlin
+val attachment = serverShip.getAttachment<MyAttachmentClass>()
+```
 
-1. Resource 1
+</tab>
+</tabs>
 
-2. Resource 2
+> The attachment class needs to have a constructor without arguments.
+> You can use a constructor with arguments for `saveAttachment` if you wish,
+> but you still need one without arguments.
+> 
+{style="note"}
 
----
+And finally, to remove the attachment:
 
-> Explore other templates from [The Good Docs Project](https://thegooddocsproject.dev/). Use our [feedback form](https://thegooddocsproject.dev/feedback/?template=Concept%20template) to give feedback on this template.
+<tabs>
+<tab title="Java">
+
+```java
+serverShip.saveAttachment(MyAttachmentClass.class, null);
+```
+
+</tab>
+<tab title="Kotlin">
+
+```kotlin
+serverShip.saveAttachment<MyAttachmentClass>(null)
+```
+
+</tab>
+</tabs>
+
+## Attachment class fields
+Every class you use as an attachment needs to follow these rules:
+
+- All fields that you don't want to be saved in the attachment need to be marked
+  with `@com.fasterxml.jackson.annotation.JsonIgnore`. This includes ships because otherwise they would recursively save themselves.
+- All types of the fields that are not marked with
+  `@com.fasterxml.jackson.annotation.JsonIgnore` need to be classes with a default
+  constructor without arguments. This means that you can't use interfaces as types of these fields
+
+## World "corruption"
+If you change anything related to fields that get saved in a ship attachment class,
+you will get an error when loading ships with the old data. This is because the ship attachment
+class is not compatible with the old data anymore. To fix this, you should create a new ship attachment class
+and make the old one copy everything over to the new one, and then delete the old one from a ship.
+
+To migrate or remove old attachments, 
+you can register an event listener to migrate ships as soon as they are loaded. 
+Simply hook into the ShipLoadEvent in your mods on-load (init) method:
+
+> For ship force inducers, you can also use the `applyForces` method as your event instead.
+>
+{style="tip"}
+
+<tabs>
+<tab title="Java">
+
+```java
+VSEvents.ShipLoadEvent.Companion.on((shipLoadEvent) -> {
+    ServerShip serverShip = shipLoadEvent.getShip();
+    // Update / remove your attachments here
+});
+```
+
+</tab>
+<tab title="Kotlin">
+
+```kotlin
+VSEvents.shipLoadEvent.on {(serverShip) -> {
+    // Update / remove your attachments here
+}}
+```
+
+</tab>
+</tabs>
+
+
+> For more information about events in VS2, go to [Events](Events.md)
+> 
+{style="tip"}
+
+## Force inducers
+To apply forces to a ship, you need a force inducer class. This class will extend the `ShipForcesInducer` interface,
+and override the `applyForces(PhysShip)` method. Then, once you save this class as an attachment to a ship, the `applyForces`
+method will be called each physics tick. You can then use the PhysShip object in `applyForces` to apply forces to your ship.
+
+The `ShipForcesInducer` interface class:
+```kotlin
+package org.valkyrienskies.core.api.ships
+
+import org.valkyrienskies.core.api.ships.PhysShip
+import org.valkyrienskies.core.api.ships.properties.ShipId
+
+@Deprecated("sus")
+interface ShipForcesInducer {
+    fun applyForces(
+        physShip: PhysShip
+    )
+
+    fun applyForcesAndLookupPhysShips(
+        physShip: PhysShip,
+        lookupPhysShip: (ShipId) -> PhysShip?
+    ) {
+        // Default implementation to not break existing implementations
+    }
+}
+```
+{collapsible="true" collapsed-title="ShipForcesInducer.kt"}
+
+> VS2 physic ticks run in a different thread than the minecraft server thread.
+> This means that you need to be careful when accessing the same fields in applyForces and elsewhere
+> 
+{style="warning" title="Thread Safety"}
+
+## Examples
+
+### Ship fuel tracking
+<tabs>
+<tab title="Java">
+
+```java
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.valkyrienskies.core.api.ships.ServerShip;
+import org.valkyrienskies.core.impl.api.ServerShipUser;
+
+public class ShipFuelStorage {
+    @JsonIgnore
+    private ServerShip ship = null;
+    int fuel = 0;
+
+    public ShipFuelStorage() {}
+
+    public ShipFuelStorage(ServerShip ship) {
+        this.ship = ship;
+    }
+
+    public static ShipFuelStorage getOrCreate(ServerShip ship) {
+        ShipFuelStorage attachment = ship.getAttachment(ShipFuelStorage.class);
+        if (attachment == null) {
+            attachment = new ShipFuelStorage(ship);
+            ship.saveAttachment(ShipFuelStorage.class, attachment);
+        }
+        return attachment;
+    }
+}
+```
+
+</tab>
+<tab title="Kotlin">
+
+```kotlin
+import com.fasterxml.jackson.annotation.JsonIgnore
+import org.valkyrienskies.core.api.ships.ServerShip
+import org.valkyrienskies.core.impl.api.ServerShipUser
+
+class ShipFuelStorage(
+    @JsonIgnore
+    var ship: ServerShip? = null
+) {
+    var fuel: Int = 0
+
+    companion object {
+        fun getOrCreate(ship: ServerShip): ShipFuelStorage =
+            ship.getAttachment<ShipFuelStorage>()
+                ?: ShipFuelStorage(ship).also {
+                    ship.saveAttachment(it)
+                }
+    }
+}
+```
+
+</tab>
+</tabs>
+
+
+### Ship thruster force inducer
+
+<tabs>
+<tab title="Java">
+
+```java
+import org.valkyrienskies.core.api.ships.PhysShip;
+import org.valkyrienskies.core.api.ships.ShipForcesInducer;
+
+public class ShipThrusterController implements ShipForcesInducer {
+
+    @Override
+    public void applyForces(@NotNull PhysShip physShip) {
+        // go through each thruster on ship and apply force
+    }
+
+    public static ShipThrusterController getOrCreate(ServerShip ship) {
+        ShipThrusterController attachment = ship.getAttachment(ShipThrusterController.class);
+        if (attachment == null) {
+            attachment = new ShipThrusterController(ship);
+            ship.saveAttachment(ShipThrusterController.class, attachment);
+        }
+        return attachment;
+    }
+}
+```
+
+</tab>
+<tab title="Kotlin">
+
+```kotlin
+import org.valkyrienskies.core.api.ships.PhysShip
+import org.valkyrienskies.core.api.ships.ShipForcesInducer
+
+class ShipThrusterController: ShipForcesInducer {
+
+    override fun applyForces(physShip: PhysShip) {
+        // go through each thruster on ship and apply force
+    }
+
+    companion object {
+        fun getOrCreate(ship: ServerShip): ShipThrusterControler =
+            ship.getAttachment<ShipThrusterControler>()
+                ?: ShipThrusterControler().also {
+                    ship.saveAttachment(it)
+                }
+    }
+}
+```
+
+</tab>
+</tabs>
+
+
