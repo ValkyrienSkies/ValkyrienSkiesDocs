@@ -12,7 +12,7 @@ public static ResourceKey<Level> VSToDimensionKey(String vsDimId) {
     // Split 'minecraft:dimension:namespace:dimension_name' into 
     // [minecraft, dimension, namespace, dimension_name]
     String split = vsDimId.split(":");
-    ResourceLocation re = ResourceLocation(split[split.size - 2], split[split.size - 1])
+    ResourceLocation re = ResourceLocation(split[split.size - 2], split[split.size - 1]);
     return ResourceKey.create(Registry.DIMENSION_REGISTRY, rl);
 }
 ```
