@@ -22,15 +22,15 @@ there are two extension functions for saving and loading attachments.
 
 To save an attachment you can do: 
 
-<tabs>
-<tab title="Java">
+<tabs group="ktj">
+<tab title="Java" group-key="java">
 
 ```java
     serverShip.saveAttachment(MyAttachmentClass.class, new MyAttachmentClass());
 ```
 
 </tab>
-<tab title="Kotlin">
+<tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
     serverShip.saveAttachment(MyAttachmentClass())
@@ -41,15 +41,15 @@ To save an attachment you can do:
 
 And to load the attachment:
 
-<tabs>
-<tab title="Java">
+<tabs group="ktj">
+<tab title="Java" group-key="java">
 
 ```java
 var attachment = serverShip.getAttachment(MyAttachmentClass.class);
 ```
 
 </tab>
-<tab title="Kotlin">
+<tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 val attachment = serverShip.getAttachment<MyAttachmentClass>()
@@ -66,15 +66,15 @@ val attachment = serverShip.getAttachment<MyAttachmentClass>()
 
 And finally, to remove the attachment:
 
-<tabs>
-<tab title="Java">
+<tabs group="ktj">
+<tab title="Java" group-key="java">
 
 ```java
 serverShip.saveAttachment(MyAttachmentClass.class, null);
 ```
 
 </tab>
-<tab title="Kotlin">
+<tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 serverShip.saveAttachment<MyAttachmentClass>(null)
@@ -106,8 +106,8 @@ Simply hook into the ShipLoadEvent in your mods on-load (init) method:
 >
 {style="tip"}
 
-<tabs>
-<tab title="Java">
+<tabs group="ktj">
+<tab title="Java" group-key="java">
 
 ```java
 VSEvents.ShipLoadEvent.Companion.on((shipLoadEvent) -> {
@@ -117,7 +117,7 @@ VSEvents.ShipLoadEvent.Companion.on((shipLoadEvent) -> {
 ```
 
 </tab>
-<tab title="Kotlin">
+<tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 VSEvents.shipLoadEvent.on {(serverShip) -> {
@@ -169,8 +169,8 @@ interface ShipForcesInducer {
 ## Examples
 
 ### Ship fuel tracking
-<tabs>
-<tab title="Java">
+<tabs group="ktj">
+<tab title="Java" group-key="java">
 
 ```java
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -200,7 +200,7 @@ public class ShipFuelStorage {
 ```
 
 </tab>
-<tab title="Kotlin">
+<tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 import com.fasterxml.jackson.annotation.JsonIgnore
@@ -229,8 +229,8 @@ class ShipFuelStorage(
 
 ### Ship thruster force inducer
 
-<tabs>
-<tab title="Java">
+<tabs group="ktj">
+<tab title="Java" group-key="java">
 
 ```java
 import org.valkyrienskies.core.api.ships.PhysShip;
@@ -255,7 +255,7 @@ public class ShipThrusterController implements ShipForcesInducer {
 ```
 
 </tab>
-<tab title="Kotlin">
+<tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 import org.valkyrienskies.core.api.ships.PhysShip

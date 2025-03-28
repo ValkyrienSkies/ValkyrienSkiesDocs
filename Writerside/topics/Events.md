@@ -27,8 +27,8 @@ VS2 provides some useful events in `VSEvents` and `VSGameEvents`
 There is a `on` method in all of those events. Register event listeners to the event through this method.
 Its recommended to do this in your mods on-load (init) method. Use it like so:
 
-<tabs>
-<tab title="Java">
+<tabs group="ktj">
+<tab title="Java" group-key="java">
 
 ```java
 [DesiredEvent].Companion.on((event) -> {
@@ -37,7 +37,7 @@ Its recommended to do this in your mods on-load (init) method. Use it like so:
 ```
 
 </tab>
-<tab title="Kotlin">
+<tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 [DesiredEvent].on {(event) -> {
@@ -51,8 +51,8 @@ Its recommended to do this in your mods on-load (init) method. Use it like so:
 ## Example
 Print the slug (name) of every ship in a world every tick:
 
-<tabs>
-<tab title="Java">
+<tabs group="ktj">
+<tab title="Java" group-key="java">
 
 ```java
 VSEvents.TickEndEvent.Companion.on((e) -> {
@@ -63,7 +63,7 @@ VSEvents.TickEndEvent.Companion.on((e) -> {
 ```
 
 </tab>
-<tab title="Kotlin">
+<tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 VSEvents.tickEndEvent.on { e ->
