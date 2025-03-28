@@ -1,6 +1,8 @@
-# How to get the ship managing a shipyard position
+# How to get a ship from a block
 
-Every ship has a chunk claim in the [shipyard](The-Shipyard.md) which contains the ship's chunks. 
+Every ship has a [chunk claim](Ship-Chunk-Claims.md) in the [shipyard](The-Shipyard.md) which contains the ship's blocks.
+If you are given one of these shipyard blocks, for example if a `level.clip()` hits a ship, you may need to get the Ship
+object so that you can transform that shipyard position back to a world position.
 
 > **Highlight important information**
 >

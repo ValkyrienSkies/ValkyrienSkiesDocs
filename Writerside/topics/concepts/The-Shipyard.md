@@ -83,5 +83,8 @@ from existing performance mods like Lithium and Sodium.
 
 ## Chunk claims
 
-In the shipyard, each ship is assigned a **chunk claim** inside the shipyard. In VS2, each chunk claim is 256x256 
-chunks. The chunks in the chunk claim are then "projected" into the world using the corresponding ship's transform.
+In the shipyard, each ship is assigned a **chunk claim**. 
+The chunks in the chunk claim are then "projected" into the world using the ship's transform.
+> See [Ship Chunk Claims](Ship-Chunk-Claims.md) for more info on how chunk claims are used
+>
+{style="note"}

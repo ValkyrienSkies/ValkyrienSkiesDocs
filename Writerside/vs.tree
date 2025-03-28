@@ -19,9 +19,11 @@
     <toc-element toc-title="Concepts">
         <toc-element topic="Joints.md"/>
         <toc-element topic="The-Shipyard.md"/>
+        <toc-element topic="Ship-Chunk-Claims.md"/>
+    </toc-element>
+    <toc-element toc-title="General documentation">
         <toc-element topic="The-Attachment-System-Explained.md"/>
         <toc-element topic="Events.md"/>
-        <toc-element topic="Ship-Chunk-Claims.md"/>
         <toc-element topic="Dimension-Ids.md"/>
     </toc-element>
     <toc-element toc-title="TODO">
