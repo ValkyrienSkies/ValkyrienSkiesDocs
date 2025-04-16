@@ -31,7 +31,7 @@ For example, this is how you inject a procedure:
 ### Tabs
 To add switchable content, you can make use of tabs (inject them by starting to type `tab` on a new line):
 
-<tabs>
+<tabs group="ktj">
     <tab title="Markdown">
         <code-block lang="plain text">![Alt Text](new_topic_options.png){ width=450 }</code-block>
     </tab>

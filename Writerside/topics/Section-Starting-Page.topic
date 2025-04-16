@@ -23,8 +23,8 @@
 
         <!--    Add up to 2 topics that you want to promote. Use the "type" attribute to select an icon.    -->
         <spotlight>
-            <a href="" type="academy" summary="This overrides the card summary of the topic">Custom card title</a>
-            <a href="" type="search" summary="This overrides the card summary of the topic">Another custom title</a>
+            <a href="" type="start" summary="How to get started on making your very own Valkyrien Skies addon!">Getting started</a>
+            <a href="How-to-migrate-to-VS-2.5.md" type="tools" summary="Information on how to migrate your addon to the VS2 2.5 API">Migrating to VS 2.5</a>
         </spotlight>
 
         <!--    Add several topics that are most important for this section.    -->

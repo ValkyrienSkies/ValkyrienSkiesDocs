@@ -137,7 +137,7 @@ final class MyAttachment {
 
 ### Migrate from constraints to joints
 
-> Try to avoid using `apigame` - we don't make any [backwards compatibility](Compatibility.md#backwards-compatibility) 
+> Try to avoid using `apigame` - we don't make any [backwards compatibility](todo/Compatibility.md#backwards-compatibility) 
 > guarantees for it.
 > 
 {style="warning"}
