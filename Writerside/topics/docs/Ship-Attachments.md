@@ -1,4 +1,3 @@
-
 # The Attachment System
 
 > Much of the attachment system is marked with `@VsBeta` and may change in the future.
@@ -15,10 +14,81 @@ objects managed by vs-core.
 - You want to persist/serialize data with a ship
 - You want to apply forces to a ship
 
+> You can view the documentation for ship attachments pre-VS 2.5.0 [here](Ship-Attachments-Pre-2.5.0.md)
+> 
+{style="tip"}
+
+## Registering your attachment
+<procedure title="" id="registering-attachment">
+   <step>
+
+Setup your attachment class. This must be a `final` class, but it doesn't need to extend/implement anything.
+(Unless your making a force inducer). 
+  </step>
+  <step>
+    Make sure your class has a constructor with no arguments.
+  </step>
+  <p>Example minimum class:</p>
+  <tabs group="ktj">
+  <tab title="Java" group-key="java">
+  
+  ```java
+  public final class MyAttachment {
+      public MyAttachment() {}
+  }
+  ```
+  
+  </tab>
+  <tab title="Kotlin" group-key="kotlin">
+  
+  ```kotlin
+  class MyAttachment() {
+  
+  }
+  ```
+  
+  </tab>
+  </tabs>
+
+   <step>Register your attachment (usually in your mod constructor)</step>
+<tabs group="ktj">
+  <tab title="Java" group-key="java">
+
+  ```java
+AttachmentRegistration registration = ValkyrienSkies.api()
+      .newAttachmentRegistrationBuilder(MyAttachment.class)
+      // Use if your migrating a pre-2.5 attachment
+      .useLegacySerializer()
+      .build();
+
+ValkyrienSkies.api().registerAttachment(registration);
+  ```
+
+  </tab>
+  <tab title="Kotlin" group-key="kotlin">
+
+  ```kotlin
+vsApi.registerAttachment(MyAttachment::class.java) {
+  // Use if your migrating a pre-2.5 attachment
+  useLegacySerializer()
+}
+  ```
+
+  </tab>
+  </tabs>
+</procedure>
+
+
+
+
 ## Saving, Loading and removing
 
-In the package `org.valkyrienskies.core.api.ships`
+In the package `org.valkyrienskies.core.api.attachments`
 there are two extension functions for saving and loading attachments.
+
+> You can only get and save attachments from a LoadedServerShip
+> 
+{style="warning"}
 
 To save an attachment you can do: 
 
@@ -26,14 +96,20 @@ To save an attachment you can do:
 <tab title="Java" group-key="java">
 
 ```java
-    serverShip.saveAttachment(MyAttachmentClass.class, new MyAttachmentClass());
+    ServerShip ship = ...
+    if (ship instanceof LoadedServerShip loadedShip) {
+        loadedShip.setAttachment(MyAttachment.class, new MyAttachment());
+    }
 ```
 
 </tab>
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
-    serverShip.saveAttachment(MyAttachmentClass())
+val ship: ServerShip = ...
+if (ship is LoadedServerShip) {
+  ship.setAttachment(MyAttachment())
+}
 ```
 
 </tab>
@@ -45,7 +121,10 @@ And to load the attachment:
 <tab title="Java" group-key="java">
 
 ```java
-var attachment = serverShip.getAttachment(MyAttachmentClass.class);
+ServerShip ship = ...
+if (ship instanceof LoadedServerShip loadedShip) {
+    var attachment = serverShip.getAttachment(MyAttachment.class);
+}
 ```
 
 </tab>
@@ -59,7 +138,7 @@ val attachment = serverShip.getAttachment<MyAttachmentClass>()
 </tabs>
 
 > The attachment class needs to have a constructor without arguments.
-> You can use a constructor with arguments for `saveAttachment` if you wish,
+> You can use a constructor with arguments for `setAttachment` if you wish,
 > but you still need one without arguments.
 > 
 {style="note"}
@@ -70,14 +149,20 @@ And finally, to remove the attachment:
 <tab title="Java" group-key="java">
 
 ```java
-serverShip.saveAttachment(MyAttachmentClass.class, null);
+ServerShip ship = ...
+if (ship instanceof LoadedServerShip loadedShip) {
+    loadedShip.setAttachment(MyAttachment.class, null);
+}
 ```
 
 </tab>
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
-serverShip.saveAttachment<MyAttachmentClass>(null)
+val ship: ServerShip = ...
+if (ship is LoadedServerShip) {
+  ship.setAttachment<MyAttachmentClass>(null)
+}
 ```
 
 </tab>
@@ -177,22 +262,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.valkyrienskies.core.api.ships.ServerShip;
 import org.valkyrienskies.core.impl.api.ServerShipUser;
 
-public class ShipFuelStorage {
+public final class ShipFuelStorage {
     @JsonIgnore
-    private ServerShip ship = null;
+    private LoadedServerShip ship = null;
     int fuel = 0;
 
     public ShipFuelStorage() {}
 
-    public ShipFuelStorage(ServerShip ship) {
+    public ShipFuelStorage(LoadedServerShip ship) {
         this.ship = ship;
     }
 
-    public static ShipFuelStorage getOrCreate(ServerShip ship) {
+    public static ShipFuelStorage getOrCreate(LoadedServerShip ship) {
         ShipFuelStorage attachment = ship.getAttachment(ShipFuelStorage.class);
         if (attachment == null) {
             attachment = new ShipFuelStorage(ship);
-            ship.saveAttachment(ShipFuelStorage.class, attachment);
+            ship.setAttachment(ShipFuelStorage.class, attachment);
         }
         return attachment;
     }
@@ -209,15 +294,15 @@ import org.valkyrienskies.core.impl.api.ServerShipUser
 
 class ShipFuelStorage(
     @JsonIgnore
-    var ship: ServerShip? = null
+    var ship: LoadedServerShip? = null
 ) {
     var fuel: Int = 0
 
     companion object {
-        fun getOrCreate(ship: ServerShip): ShipFuelStorage =
+        fun getOrCreate(ship: LoadedServerShip): ShipFuelStorage =
             ship.getAttachment<ShipFuelStorage>()
                 ?: ShipFuelStorage(ship).also {
-                    ship.saveAttachment(it)
+                    ship.setAttachment(it)
                 }
     }
 }
@@ -279,5 +364,4 @@ class ShipThrusterController: ShipForcesInducer {
 
 </tab>
 </tabs>
-
 
