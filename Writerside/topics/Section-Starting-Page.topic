@@ -54,7 +54,7 @@
 
         <!--    Add several topics that are less important or are relevant only for advanced/experienced users.    -->
         <secondary>
-            <title>Explore advanced concepts</title>
+            <title>Important Concepts</title>
             <a href="Forces-and-Torques.md"/>
             <a href="The-Attachment-System-Explained.md"/>
             <a href="Bodies.md"/>
