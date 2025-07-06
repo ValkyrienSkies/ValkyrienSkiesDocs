@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE labels SYSTEM "https://resources.jetbrains.com/writerside/1.0/labels-list.dtd">
+<labels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/labels.xsd">
+    <secondary-label id="experimental" name="Experimental" color="tangerine">
+        Experimental features and APIs may be changed in the future.
+    </secondary-label>
+
+    <secondary-label id="2.5" name="VS 2.5" color="blue">
+        New in Valkyrien Skies 2.5
+    </secondary-label>
+</labels>

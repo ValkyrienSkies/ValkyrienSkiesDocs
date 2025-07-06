@@ -88,6 +88,11 @@ Your attachments now need to be registered.
 To migrate legacy attachments in a backwards compatible way, make sure to call `useLegacySerializer()` while registering
 the attachments.
 
+> If you previously used `setAttachment` to set attachments without serializing them, call `useTransientSerializer()` 
+> instead.
+> 
+{style="note"}
+
 <tabs group="ktj">
 <tab title="Kotlin" group-key="kotlin">
 <code-block lang="Kotlin">
@@ -146,10 +151,16 @@ Constraints are now [joints](Joints.md), and everything in `org.valkyrienskies.c
 removed. 
 
 
+## Recommended changes
+
+These changes aren't strictly required, but they will make your life easier during future updates and improve the
+quality of your code.
+
 ### Use `rebuild` and `toBuilder` instead of `ShipTransform.copy`
 
-> Also recommended: start using `BodyTransform` instead of `ShipTransform`. You can freely cast between the two.
-> 
+> Also recommended: start using `BodyTransform` instead of `ShipTransform`. You can always downcast `BodyTransform` to
+> `ShipTransform` if you need to.
+>
 {style="note"}
 
 <tabs group="ktj">
@@ -190,17 +201,14 @@ BodyTransform newTransform = transform.toBuilder()
 </tab>
 </tabs>
 
-## Recommended changes
-
-These changes aren't strictly required, but they will make your life easier during future updates and improve the
-quality of your code.
-
 ### Use recommended packages
 
-**For Java users:** Start using `ValkyrienSkies`. Stop using `VSGameUtilsKt` and `VectorConversionsMCKt`. Remove  
-imports from `org.valkyrienskies.mod.common`. 
+**Java users:** 
+- Use `ValkyrienSkies` instead of `VSGameUtilsKt` and `VectorConversionsMCKt`. 
+- Remove imports from `org.valkyrienskies.mod.common`. 
 
-**For Kotlin users:** Remove imports from `org.valkyrienskies.mod.common`.
+**Kotlin users:** 
+- Remove imports from `org.valkyrienskies.mod.common`.
 
 > **Check the deprecation warnings**
 > 
@@ -249,6 +257,31 @@ import org.valkyrienskies.mod.api.ValkyrienSkies
 Level level = ...
 BlockPos pos = ...
 Ship ship = ValkyrienSkies.getShipManagingBlock(level, pos);
+</code-block>
+</compare>
+</tab>
+</tabs>
+
+#### Use `vsApi.xxEvent` instead of `VSEvents.XxEvent`
+
+<tabs group="ktj">
+<tab title="Kotlin" group-key="kotlin">
+<compare type="top-bottom" first-title="Before" second-title="After">
+<code-block lang="Kotlin">
+VSEvents.ShipLoadEvent.on { ev -> }
+</code-block>
+<code-block lang="Kotlin">
+vsApi.shipLoadEvent.on { ev -> }
+</code-block>
+</compare>
+</tab>
+<tab title="Java" group-key="java">
+<compare type="top-bottom" first-title="Before" second-title="After">
+<code-block lang="Java">
+VSEvents.ShipLoadEvent.Companion.on(ev -> {});
+</code-block>
+<code-block lang="Java">
+ValkyrienSkies.api().getShipLoadEvent().on(ev -> {});
 </code-block>
 </compare>
 </tab>

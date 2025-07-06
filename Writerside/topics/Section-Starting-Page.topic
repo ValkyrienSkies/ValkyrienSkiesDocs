@@ -5,107 +5,123 @@
        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
        title="Home" id="Section-Starting-Page">
 
-<!--    A section combines multiple topics dedicated to a specific subject.
-            Add a starting page to provide an overview of the topics in the section.
-            Start with two topics you want to promote in the <spotlight> group,
-            several important topics in the <primary> group (for example, where to start),
-            several less important topics in the <secondary> group (for example, more advanced topics),
-            and optionally add any other relevant topics in the <misc> group as cards and lists of links
-            (maybe related topics from other sections).
-            Only the spotlight section is limited to two topics.
-            For other groups, try to keep the number between 2 and 6, but you can add more if necessary.-->
+    <!--    A section combines multiple topics dedicated to a specific subject.
+                Add a starting page to provide an overview of the topics in the section.
+                Start with two topics you want to promote in the <spotlight> group,
+                several important topics in the <primary> group (for example, where to start),
+                several less important topics in the <secondary> group (for example, more advanced topics),
+                and optionally add any other relevant topics in the <misc> group as cards and lists of links
+                (maybe related topics from other sections).
+                Only the spotlight section is limited to two topics.
+                For other groups, try to keep the number between 2 and 6, but you can add more if necessary.-->
 
     <section-starting-page>
         <title>Valkyrien Skies docs</title>
         <description>
-            Learn how to use Valkyrien Skies 2.5
+            Learn how to develop mods with Valkyrien Skies
         </description>
 
         <!--    Add up to 2 topics that you want to promote. Use the "type" attribute to select an icon.    -->
         <spotlight>
-            <a href="" type="academy" summary="This overrides the card summary of the topic">Custom card title</a>
-            <a href="" type="search" summary="This overrides the card summary of the topic">Another custom title</a>
+            <a href="Develop-you-first-addon.md"
+               type="academy"
+               summary="Learn how to create your own Valkyrien Skies addon">
+                Develop your first addon
+            </a>
+            <a href="How-to-add-Valkyrien-Skies-to-your-dev-environment.md"
+               type="development"
+               summary="Add Valkyrien Skies to an existing dev environment">
+                I already have a mod
+            </a>
         </spotlight>
 
         <!--    Add several topics that are most important for this section.    -->
         <primary>
-            <title>Get started</title>
-            <a href=""/>
-            <a href="" summary="With a custom card summary"/>
-            <a href="">Custom card title</a>
-            <a href="" summary="With a custom card summary">Custom card title</a>
+            <title>How to...</title>
+            <a href="How-to-transform-coordinates-from-shipyard-to-world.md">
+                Transform a position from shipyard to world
+            </a>
+            <a href="How-to-get-a-ship.md">
+                Get the ship managing a shipyard position
+            </a>
+            <a href="How-to-teleport-a-ship.md">
+                Teleport a ship
+            </a>
+            <a href="How-to-assemble-a-ship.md">
+                Assemble a ship
+            </a>
         </primary>
 
         <!--    Add several topics that are less important or are relevant only for advanced/experienced users.    -->
         <secondary>
-            <title>Explore advanced features</title>
-            <a href=""/>
-            <a href="" summary="With a custom card summary"/>
-            <a href="">Custom card title</a>
-            <a href="" summary="With a custom card summary">Custom card title</a>
+            <title>Explore advanced concepts</title>
+            <a href="Forces-and-Torques.md"/>
+            <a href="The-Attachment-System-Explained.md"/>
+            <a href="Bodies.md"/>
+            <a href="Joints.md"/>
         </secondary>
 
-        <!--    Optionally add additional cards and links to topics that are not in this section but may be relevant.    -->
-        <misc>
-            <cards>
-                <title>Other relevant topics as wide cards</title>
-                <a href=""/>
-                <a href="" summary="With a custom card summary"/>
-                <a href="">Custom card title</a>
-                <a href="" summary="With a custom card summary">Custom card title</a>
-            </cards>
+<!--        &lt;!&ndash;    Optionally add additional cards and links to topics that are not in this section but may be relevant.    &ndash;&gt;-->
+<!--        <misc>-->
+<!--            <cards>-->
+<!--                <title>Other relevant topics as wide cards</title>-->
+<!--                <a href=""/>-->
+<!--                <a href="" summary="With a custom card summary"/>-->
+<!--                <a href="">Custom card title</a>-->
+<!--                <a href="" summary="With a custom card summary">Custom card title</a>-->
+<!--            </cards>-->
 
-            <cards narrow="true">
-                <title>Other relevant topics as narrow cards</title>
-                <a href=""/>
-                <a href=""/>
-                <a href="" summary="With a custom card summary"/>
-                <a href="">Custom card title</a>
-                <a href="">Custom card title</a>
-                <a href="" summary="With a custom card summary">Custom card title</a>
-            </cards>
+<!--            <cards narrow="true">-->
+<!--                <title>Other relevant topics as narrow cards</title>-->
+<!--                <a href=""/>-->
+<!--                <a href=""/>-->
+<!--                <a href="" summary="With a custom card summary"/>-->
+<!--                <a href="">Custom card title</a>-->
+<!--                <a href="">Custom card title</a>-->
+<!--                <a href="" summary="With a custom card summary">Custom card title</a>-->
+<!--            </cards>-->
 
-            <links>
-                <group>
-                    <title>Other related topics as links</title>
-                    <a href=""/>
-                    <a href="" summary="With a custom card summary"/>
-                    <a href="">Custom card title</a>
-                    <a href="" summary="With a custom card summary">Custom card title</a>
-                </group>
-                <group>
-                    <title>Two in a row</title>
-                    <a href=""/>
-                    <a href="" summary="With a custom card summary"/>
-                    <a href="">Custom card title</a>
-                    <a href="" summary="With a custom card summary">Custom card title</a>
-                </group>
-            </links>
+<!--            <links>-->
+<!--                <group>-->
+<!--                    <title>Other related topics as links</title>-->
+<!--                    <a href=""/>-->
+<!--                    <a href="" summary="With a custom card summary"/>-->
+<!--                    <a href="">Custom card title</a>-->
+<!--                    <a href="" summary="With a custom card summary">Custom card title</a>-->
+<!--                </group>-->
+<!--                <group>-->
+<!--                    <title>Two in a row</title>-->
+<!--                    <a href=""/>-->
+<!--                    <a href="" summary="With a custom card summary"/>-->
+<!--                    <a href="">Custom card title</a>-->
+<!--                    <a href="" summary="With a custom card summary">Custom card title</a>-->
+<!--                </group>-->
+<!--            </links>-->
 
-            <links narrow="true">
-                <group>
-                    <title>More related topics</title>
-                    <a href=""/>
-                    <a href="" summary="With a custom card summary"/>
-                    <a href="">Custom card title</a>
-                    <a href="" summary="With a custom card summary">Custom card title</a>
-                </group>
-                <group>
-                    <title>Three in a row</title>
-                    <a href=""/>
-                    <a href=""/>
-                    <a href="">Custom card title</a>
-                    <a href="">Custom card title</a>
-                </group>
-                <group>
-                    <title>Each group is narrow</title>
-                    <a href=""/>
-                    <a href=""/>
-                    <a href="">Custom card title</a>
-                    <a href="">Custom card title</a>
-                </group>
-            </links>
-        </misc>
+<!--            <links narrow="true">-->
+<!--                <group>-->
+<!--                    <title>More related topics</title>-->
+<!--                    <a href=""/>-->
+<!--                    <a href="" summary="With a custom card summary"/>-->
+<!--                    <a href="">Custom card title</a>-->
+<!--                    <a href="" summary="With a custom card summary">Custom card title</a>-->
+<!--                </group>-->
+<!--                <group>-->
+<!--                    <title>Three in a row</title>-->
+<!--                    <a href=""/>-->
+<!--                    <a href=""/>-->
+<!--                    <a href="">Custom card title</a>-->
+<!--                    <a href="">Custom card title</a>-->
+<!--                </group>-->
+<!--                <group>-->
+<!--                    <title>Each group is narrow</title>-->
+<!--                    <a href=""/>-->
+<!--                    <a href=""/>-->
+<!--                    <a href="">Custom card title</a>-->
+<!--                    <a href="">Custom card title</a>-->
+<!--                </group>-->
+<!--            </links>-->
+<!--        </misc>-->
     </section-starting-page>
 
 </topic>

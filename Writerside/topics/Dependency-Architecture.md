@@ -1,3 +1,2 @@
 # Dependency Architecture
 
-Start typing here...

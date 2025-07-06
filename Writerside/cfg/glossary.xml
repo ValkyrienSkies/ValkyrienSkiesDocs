@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE terms SYSTEM "https://resources.jetbrains.com/writerside/1.0/glossary.dtd">
 <terms>
-    <term name="foo">
-        Description of what "foo" is.
+    <term name="minecraft-entity">
+        A Minecraft entity, such as a Zombie, Painting, or Item.
+    </term>
+    <term name="managing">
+        A ship is said to be managing chunks and positions which are contained within its chunk claim.
     </term>
 </terms>

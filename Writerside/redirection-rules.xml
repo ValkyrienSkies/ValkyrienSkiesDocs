@@ -25,4 +25,14 @@
         <description>Created after removal of "How to" from Valkyrien Skies</description>
         <accepts>How-to.html</accepts>
     </rule>
+    <rule id="4f27bac8">
+        <description>Created after removal of "How to start developing a Valkyrien Skies addon" from Valkyrien Skies
+        </description>
+        <accepts>How-to-start-developing-a-Valkyrien-Skies-addon.html</accepts>
+    </rule>
+    <rule id="32be5451">
+        <description>Created after removal of "Set up an addon development environment" from Valkyrien Skies
+        </description>
+        <accepts>Setup-an-addon-development-environment.html</accepts>
+    </rule>
 </rules>

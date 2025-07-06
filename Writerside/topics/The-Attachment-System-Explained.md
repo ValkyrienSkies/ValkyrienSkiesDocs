@@ -11,7 +11,7 @@ objects managed by vs-core.
 
 - You want to associate some data with a ship temporarily
 - You want to persist/serialize data with a ship
-- You want to apply forces to a ship
+- You want to apply [forces](Forces-and-Torques.md) to a ship
 
 ## (Optional) Comparison of {(thing being compared)}
 
