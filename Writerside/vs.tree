@@ -36,9 +36,9 @@
         <toc-element topic="The-Attachment-System-Explained.md"/>
     </toc-element>
     <toc-element toc-title="Release notes">
-        <toc-element topic="What-s-new-in-VS-2-5.md"/>
+        <toc-element topic="What-s-new-in-VS-2-4.md"/>
         <toc-element toc-title="Migration guides">
-            <toc-element topic="How-to-migrate-to-VS-2.5.md"/>
+            <toc-element topic="How-to-migrate-to-VS-2.4.md"/>
         </toc-element>
     </toc-element>
     <toc-element toc-title="TODO">
@@ -49,4 +49,5 @@
     </toc-element>
     <toc-element toc-title="API reference" href="#"/>
     <toc-element toc-title="Community Wiki" href="https://wiki.valkyrienskies.org/wiki/Main_Page"/>
+    <toc-element topic="PhysLevels.md"/>
 </instance-profile>

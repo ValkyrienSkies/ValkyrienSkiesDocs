@@ -6,7 +6,7 @@
         Experimental features and APIs may be changed in the future.
     </secondary-label>
 
-    <secondary-label id="2.5" name="VS 2.5" color="blue">
-        New in Valkyrien Skies 2.5
+    <secondary-label id="2.4" name="VS 2.4" color="blue">
+        New in Valkyrien Skies 2.4
     </secondary-label>
 </labels>

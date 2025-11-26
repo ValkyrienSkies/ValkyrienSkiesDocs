@@ -1,20 +1,20 @@
 <show-structure depth="2"/>
 
-# How to migrate to VS 2.5
+# How to migrate to VS 2.4
 
-Valkyrien Skies 2.5 introduced a number of breaking API changes. Addon developers and other mod developers with
+Valkyrien Skies 2.4 introduced a number of breaking API changes. Addon developers and other mod developers with
 VS integration will need to update their mods.
 
 > **Are you a player or modpack developer?**
 >
 > You might need to update your addons to the latest version, or wait until their authors update them to be compatible
-> with VS 2.5
+> with VS 2.4
 >
 {style="tip"}
 
 ## Required changes
 
-These changes are required for your mod or addon to continue functioning with VS 2.5.
+These changes are required for your mod or addon to continue functioning with VS 2.4.
 
 > **Look out for methods and classes marked `@VsBeta` or `@Experimental`**
 >
@@ -142,14 +142,53 @@ final class MyAttachment {
 
 ### Migrate from constraints to joints
 
-> Try to avoid using `apigame` - we don't make any [backwards compatibility](Compatibility.md#backwards-compatibility) 
+> Try to avoid using `internal` - we don't make any [backwards compatibility](Compatibility.md#backwards-compatibility) 
 > guarantees for it.
 > 
 {style="warning"}
 
 Constraints are now [joints](Joints.md), and everything in `org.valkyrienskies.core.apigame.constraints` has been 
-removed. 
+removed.
 
+### Migrate to new force application methods
+
+Force application has been revamped. The old methods in `org.valkyrienskies.core.api.ships.PhysShip` have been marked as deprecated, and point to their new counterparts.
+
+| Original                                                                        | Replacement                                                                |
+|---------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `applyInvariantForce(force)` &&<br>`applyInvariantForceToPos(force, pos)`       | `applyWorldForce(force, pos)` OR<br>`applyWorldForceToBodyPos(force, pos)` |
+| `applyInvariantTorque(torque)`                                                  | `applyWorldTorque(torque)`                                                 |
+| `applyRotDependentForce(force)` &&<br>`applyRotDependentForceToPos(force, pos)` | `applyBodyForce(force, pos)`                                               |
+| `applyRotDependentTorque(torque)`                                               | `applyBodyTorque(torque)`                                                  |
+
+> Note: The old methods all behaved as if their positions were in Body Space, meaning they used positions relative to the ship's Center of Mass.
+> There are several new methods, which are named according to the reference space they take as positions:
+> 
+> **[WORLD SPACE]** : Positions are in world coordinates, and directions are relative to the world axes; up is always relative to the sky and typically inverse of gravity.
+> 
+> **[MODEL SPACE]** : Positions are in shipyard coordinates, and directions are relative to the ship's axes; up is relative to the ship's orientation.
+> 
+> **[BODY SPACE]** : Positions are relative to the ship's Center of Mass, and directions are relative to the ship's axes; up is relative to the ship's orientation.
+> 
+> To achieve the effect of the old INVARIANT methods, use methods that apply a WORLD relative force/torque. These are `applyWorldForce`, `applyWorldTorque`, `applyWorldForceToModelPos`, and `applyWorldForceToBodyPos`.
+> 
+> To achieve the effect of the old ROTATION-DEPENDENT methods, use methods that apply a BODY or MODEL relative force/torque. These are `applyBodyForce`, `applyBodyTorque`, `applyModelForce`, and `applyModelTorque`.
+>
+{style="note"}
+
+Additionally, there are new methods to apply forces/torques in ship-space coordinates; you can find all of these methods and further documentation in the javadocs for `PhysShip`.
+
+### Migrate from ShipForceAppliers to ShipPhysicsListeners
+
+> Try to avoid using `internal` - we don't make any [backwards compatibility](Compatibility.md#backwards-compatibility)
+> guarantees for it.
+>
+{style="warning"}
+
+The `ShipForceApplier` interface has been removed. Use `ShipPhysicsListener` instead, which takes advantage of the new [PhysLevels](PhysLevels.md) to provide a more cohesive way to access things that reside on the Physics Thread.
+
+`applyForces` and `applyForcesToNearbyShips` have been replaced with `physTick(physShip, physLevel)`. This allows you to add/update/remove joints, enable and disable collision pairs, and access other ships through the provided PhysLevel.
+Experimental API features such as retrieving all joints in the world can be accessed through `VsiPhysLevel`, though this is not advised for general use, as it may change in future versions.
 
 ## Recommended changes
 
