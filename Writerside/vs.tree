@@ -27,6 +27,7 @@
         <toc-element topic="Develop-you-first-addon.md"/>
     </toc-element>
     <toc-element toc-title="Concepts">
+        <toc-element topic="PhysLevels.md"/>
         <toc-element topic="Ships.md"/>
         <toc-element topic="Bodies.md"/>
         <toc-element topic="Forces-and-Torques.md"/>
@@ -49,5 +50,4 @@
     </toc-element>
     <toc-element toc-title="API reference" href="#"/>
     <toc-element toc-title="Community Wiki" href="https://wiki.valkyrienskies.org/wiki/Main_Page"/>
-    <toc-element topic="PhysLevels.md"/>
 </instance-profile>

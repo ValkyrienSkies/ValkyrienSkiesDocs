@@ -154,12 +154,12 @@ removed.
 
 Force application has been revamped. The old methods in `org.valkyrienskies.core.api.ships.PhysShip` have been marked as deprecated, and point to their new counterparts.
 
-| Original                                                                        | Replacement                                                                |
-|---------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| `applyInvariantForce(force)` &&<br>`applyInvariantForceToPos(force, pos)`       | `applyWorldForce(force, pos)` OR<br>`applyWorldForceToBodyPos(force, pos)` |
-| `applyInvariantTorque(torque)`                                                  | `applyWorldTorque(torque)`                                                 |
-| `applyRotDependentForce(force)` &&<br>`applyRotDependentForceToPos(force, pos)` | `applyBodyForce(force, pos)`                                               |
-| `applyRotDependentTorque(torque)`                                               | `applyBodyTorque(torque)`                                                  |
+| Original                                                                             | Replacement                                                                     |
+|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| `applyInvariantForce(force)` &&<br><\br>`applyInvariantForceToPos(force, pos)`       | `applyWorldForce(force, pos)` OR<br><\br>`applyWorldForceToBodyPos(force, pos)` |
+| `applyInvariantTorque(torque)`                                                       | `applyWorldTorque(torque)`                                                      |
+| `applyRotDependentForce(force)` &&<br><\br>`applyRotDependentForceToPos(force, pos)` | `applyBodyForce(force, pos)`                                                    |
+| `applyRotDependentTorque(torque)`                                                    | `applyBodyTorque(torque)`                                                       |
 
 > Note: The old methods all behaved as if their positions were in Body Space, meaning they used positions relative to the ship's Center of Mass.
 > There are several new methods, which are named according to the reference space they take as positions:
