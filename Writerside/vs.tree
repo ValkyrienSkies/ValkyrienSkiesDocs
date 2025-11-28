@@ -28,6 +28,7 @@
     </toc-element>
     <toc-element toc-title="Concepts">
         <toc-element topic="PhysLevels.md"/>
+        <toc-element topic="Coordinate-Spaces.md"/>
         <toc-element topic="Ships.md"/>
         <toc-element topic="Bodies.md"/>
         <toc-element topic="Forces-and-Torques.md"/>
