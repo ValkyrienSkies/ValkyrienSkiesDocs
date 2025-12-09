@@ -5,7 +5,7 @@ In this guide, we'll add Valkyrien Skies to an existing development environment 
 
 # How to add Valkyrien Skies to your dev environment
 
-> If you're starting a new addon and don't have an existing development environment, see [](Develop-you-first-addon.md)
+> If you're starting a new addon and don't have an existing development environment, see [](Develop-your-first-addon.md)
 >
 {style="note"}
 

@@ -23,7 +23,7 @@
 
         <!--    Add up to 2 topics that you want to promote. Use the "type" attribute to select an icon.    -->
         <spotlight>
-            <a href="Develop-you-first-addon.md"
+            <a href="Develop-your-first-addon.md"
                type="academy"
                summary="Learn how to create your own Valkyrien Skies addon">
                 Develop your first addon
