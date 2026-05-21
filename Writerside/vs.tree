@@ -22,6 +22,9 @@
             <toc-element topic="How-to-disassemble-a-ship.md"/>
             <toc-element topic="How-to-teleport-a-ship.md"/>
         </toc-element>
+        <toc-element toc-title="Bodies">
+            <toc-element topic="How-to-create-a-custom-collision-body.md"/>
+        </toc-element>
     </toc-element>
     <toc-element toc-title="Tutorials">
         <toc-element topic="Develop-your-first-addon.md"/>
