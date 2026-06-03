@@ -11,6 +11,7 @@
         <toc-element toc-title="Attachments">
             <toc-element topic="How-to-migrate-an-attachment.md"/>
         </toc-element>
+        <toc-element topic="How-to-setup-an-attachment.md"/>
         <toc-element toc-title="Setup">
             <toc-element topic="How-to-add-Valkyrien-Skies-to-your-dev-environment.md"/>
             <toc-element topic="How-to-install-the-prerequisites-for-addon-development-on-Windows.md"/>
