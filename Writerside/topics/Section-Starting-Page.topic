@@ -16,9 +16,9 @@
                 For other groups, try to keep the number between 2 and 6, but you can add more if necessary.-->
 
     <section-starting-page>
-        <title>Valkyrien Skies docs</title>
+        <title>Valkyrien Skies Dev Docs</title>
         <description>
-            Learn how to develop mods with Valkyrien Skies
+            Important concepts and how-to guides for getting started working with Valkyrien Skies 2.
         </description>
 
         <!--    Add up to 2 topics that you want to promote. Use the "type" attribute to select an icon.    -->

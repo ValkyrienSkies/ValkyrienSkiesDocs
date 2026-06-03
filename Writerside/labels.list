@@ -9,4 +9,8 @@
     <secondary-label id="2.4" name="VS 2.4" color="blue">
         New in Valkyrien Skies 2.4
     </secondary-label>
+
+    <secondary-label id="2.5" name="VS 2.5" color="yellow">
+        New in Valkyrien Skies 2.5
+    </secondary-label>
 </labels>
