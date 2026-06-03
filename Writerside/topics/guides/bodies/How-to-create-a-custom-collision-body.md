@@ -1,5 +1,5 @@
 # How to create a custom collision body
-
+<secondary-label ref="2.5"/>
 <secondary-label ref="experimental"/>
 
 Create a standalone `VSBody` with a collision shape chosen by your addon. This is useful for physics objects that are
