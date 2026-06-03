@@ -9,6 +9,7 @@
     <toc-element topic="Section-Starting-Page.topic"/>
     <toc-element toc-title="How to guides">
         <toc-element toc-title="Attachments">
+            <toc-element topic="How-to-use-a-physics-tick-attachment.md"/>
             <toc-element topic="How-to-setup-an-attachment.md"/>
             <toc-element topic="How-to-migrate-an-attachment.md"/>
         </toc-element>
