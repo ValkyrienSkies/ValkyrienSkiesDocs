@@ -1,6 +1,6 @@
 # How to setup an attachment
 
-Learn how to make a basic attachment class and apply it to a ship
+Learn how to make a basic attachment class and add it to a ship
 
 ## Introduction
 
@@ -70,7 +70,7 @@ Keep in mind these values may be accessed on different threads, often the gameth
 
 ### Registering the class as an attachment
 
-Attempting to save the attachment to a ship will crash if the attachment has not been registered beforehand. 
+Attempting to add the attachment to a ship will crash if the attachment has not been registered beforehand. 
 
 It's recommended to register your attachments in your mod's constructor.
 
@@ -95,13 +95,13 @@ public MyMod() {
 
 ### Adding the attachment to a ship
 
-> If you want the attachment to be applied to _every_ ship, you can pair the setting of the attachment with the [ShipLoadEvent]().
+> If you want the attachment to be applied to _every_ ship, you can pair the adding of the attachment with the [ShipLoadEvent]().
 >
 {style="tip"}
 
 Now that you have your attachment class registered and ready to go, it's time to add it to a ship. 
 
-You can **only** set attachments on `LoadedServerShip`s. You may need to use `getLoadedShipManagingPos` instead of `getShipManagingPos`.
+You can **only** add attachments to `LoadedServerShip`s. You may need to use `getLoadedShipManagingPos` instead of `getShipManagingPos`, or do a (safe) cast.
 
 <tabs group="ktj">
 <tab title="Kotlin" group-key="kotlin">
@@ -118,7 +118,7 @@ ship.setAttachment(new MyAttachment(true)); // turboMode = true
 
 ### Getting the attachment from a ship
 
-A `LoadedServerShip` is also required for getting your attachment back, for example to check the `turboMode` of a ship.
+A `LoadedServerShip` is also required for getting your attachment back, for example to _check_ the `turboMode` of a ship.
 
 <tabs group="ktj">
 <tab title="Kotlin" group-key="kotlin">
@@ -135,7 +135,7 @@ ship.getAttachment(MyAttachment.class);
 
 ### Updating the attachment of a ship
 
-To update the data of an attachment, simply get the attachment, change the value you want to change, then set the attachment with your updated instance.
+To update the data of an attachment, simply get the attachment, change the value you want to change, then add back the attachment with the updated instance.
 
 For example, to toggle the value of our `turboMode`:
 
