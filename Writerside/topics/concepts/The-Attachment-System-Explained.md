@@ -13,6 +13,10 @@ objects managed by vs-core.
 - You want to persist/serialize data with a ship
 - You want to apply [forces](Forces-and-Torques.md) to a ship
 
+> See [](How-to-setup-an-attachment.md) and [](How-to-use-a-physics-tick-attachment.md) for more info
+>
+{style="tip"}
+
 ## (Optional) Comparison of {(thing being compared)}
 
 {(Use this section to compare options or alternatives.)}
