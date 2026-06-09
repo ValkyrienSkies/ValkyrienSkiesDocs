@@ -41,11 +41,11 @@ To create a joint, you will need:
         <code>VSGearJoint</code>, 
         <code>VSRackAndPinionJoint</code>, 
         <code>VSD6Joint</code>
-        <br>
-        <br>
+        <br></br>
+        <br></br>
         Different joint subclasses require different amounts of parameters to be specified. 
-        <br>
-        <br>
+        <br></br>
+        <br></br>
         For simplicity, this page will demonstrate using the <code>VSFixedJoint</code>, which requires the least parameters to set up.
     </def>
 </deflist>
