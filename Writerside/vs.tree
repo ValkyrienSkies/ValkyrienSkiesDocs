@@ -33,6 +33,9 @@
         <toc-element toc-title="Bodies">
             <toc-element topic="How-to-create-a-custom-collision-body.md"/>
         </toc-element>
+        <toc-element toc-title="Schematics">
+            <toc-element topic="How-to-use-ICopyableBlock.md"/>
+        </toc-element>
     </toc-element>
     <toc-element toc-title="Tutorials">
         <toc-element topic="Develop-your-first-addon.md"/>
