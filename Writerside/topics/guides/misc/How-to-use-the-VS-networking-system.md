@@ -1,4 +1,4 @@
-# Networking
+# How to use the VS networking system
 
 Valkyrien Skies uses its own loader-abstracted networking system, which addons can use too.
 
