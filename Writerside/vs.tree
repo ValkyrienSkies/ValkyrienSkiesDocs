@@ -39,6 +39,7 @@
         </toc-element>
     </toc-element>
     <toc-element toc-title="Tutorials">
+        <toc-element topic="Make-a-bearing-block.md"/>
         <toc-element topic="Develop-your-first-addon.md"/>
     </toc-element>
     <toc-element toc-title="Concepts">
